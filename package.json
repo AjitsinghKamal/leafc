@@ -1,0 +1,17 @@
+{
+	"name": "leafc",
+	"version": "0.1.0",
+	"private": true,
+	"workspaces": [
+		"packages/*"
+	],
+	"author": "AjitsinghKamal",
+	"scripts": {
+		"server:dev": "yarn workspace @leafc/server dev",
+		"server:lint": "yarn workspace @leafc/server lint",
+		"server:prettier": "yarn workspace @leafc/server prettier",
+		"server:format": "yarn workspace @leafc/server format",
+		"client:dev": "yarn workspace @leafc/client dev"
+	},
+	"license": "ISC"
+}
