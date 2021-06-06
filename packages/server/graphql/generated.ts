@@ -32,30 +32,37 @@ export type Scalars = {
 
 export type Query = {
 	__typename?: "Query";
-	product?: Maybe<Product>;
 	category?: Maybe<Category>;
-};
-
-export type QueryproductArgs = {
-	id: Scalars["Int"];
+	categories: Array<Category>;
+	product?: Maybe<Product>;
+	products?: Maybe<Array<Maybe<Product>>>;
 };
 
 export type QuerycategoryArgs = {
 	id: Scalars["Int"];
 };
 
+export type QueryproductArgs = {
+	id: Scalars["Int"];
+};
+
+export type QueryproductsArgs = {
+	categoryId?: Maybe<Scalars["Int"]>;
+};
+
 export type Product = {
 	__typename?: "Product";
+	id: Scalars["ID"];
 	title: Scalars["String"];
-	price: Scalars["String"];
-	short_description: Scalars["String"];
-	long_description?: Maybe<Scalars["String"]>;
+	price: Scalars["Float"];
+	description: Scalars["String"];
+	category: Category;
 };
 
 export type Category = {
 	__typename?: "Category";
+	id: Scalars["ID"];
 	title: Scalars["String"];
-	description: Scalars["String"];
 };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -170,7 +177,9 @@ export type ResolversTypes = {
 	Query: ResolverTypeWrapper<{}>;
 	Int: ResolverTypeWrapper<Scalars["Int"]>;
 	Product: ResolverTypeWrapper<Product>;
+	ID: ResolverTypeWrapper<Scalars["ID"]>;
 	String: ResolverTypeWrapper<Scalars["String"]>;
+	Float: ResolverTypeWrapper<Scalars["Float"]>;
 	Category: ResolverTypeWrapper<Category>;
 	Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
 };
@@ -180,7 +189,9 @@ export type ResolversParentTypes = {
 	Query: {};
 	Int: Scalars["Int"];
 	Product: Product;
+	ID: Scalars["ID"];
 	String: Scalars["String"];
+	Float: Scalars["Float"];
 	Category: Category;
 	Boolean: Scalars["Boolean"];
 };
@@ -189,17 +200,28 @@ export type QueryResolvers<
 	ContextType = MercuriusContext,
 	ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
 > = {
+	category?: Resolver<
+		Maybe<ResolversTypes["Category"]>,
+		ParentType,
+		ContextType,
+		RequireFields<QuerycategoryArgs, "id">
+	>;
+	categories?: Resolver<
+		Array<ResolversTypes["Category"]>,
+		ParentType,
+		ContextType
+	>;
 	product?: Resolver<
 		Maybe<ResolversTypes["Product"]>,
 		ParentType,
 		ContextType,
 		RequireFields<QueryproductArgs, "id">
 	>;
-	category?: Resolver<
-		Maybe<ResolversTypes["Category"]>,
+	products?: Resolver<
+		Maybe<Array<Maybe<ResolversTypes["Product"]>>>,
 		ParentType,
 		ContextType,
-		RequireFields<QuerycategoryArgs, "id">
+		RequireFields<QueryproductsArgs, never>
 	>;
 };
 
@@ -207,18 +229,11 @@ export type ProductResolvers<
 	ContextType = MercuriusContext,
 	ParentType extends ResolversParentTypes["Product"] = ResolversParentTypes["Product"]
 > = {
+	id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
 	title?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-	price?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-	short_description?: Resolver<
-		ResolversTypes["String"],
-		ParentType,
-		ContextType
-	>;
-	long_description?: Resolver<
-		Maybe<ResolversTypes["String"]>,
-		ParentType,
-		ContextType
-	>;
+	price?: Resolver<ResolversTypes["Float"], ParentType, ContextType>;
+	description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+	category?: Resolver<ResolversTypes["Category"], ParentType, ContextType>;
 	isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -226,8 +241,8 @@ export type CategoryResolvers<
 	ContextType = MercuriusContext,
 	ParentType extends ResolversParentTypes["Category"] = ResolversParentTypes["Category"]
 > = {
+	id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
 	title?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-	description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
 	isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -266,25 +281,16 @@ export interface Loaders<
 	}
 > {
 	Product?: {
+		id?: LoaderResolver<Scalars["ID"], Product, {}, TContext>;
 		title?: LoaderResolver<Scalars["String"], Product, {}, TContext>;
-		price?: LoaderResolver<Scalars["String"], Product, {}, TContext>;
-		short_description?: LoaderResolver<
-			Scalars["String"],
-			Product,
-			{},
-			TContext
-		>;
-		long_description?: LoaderResolver<
-			Maybe<Scalars["String"]>,
-			Product,
-			{},
-			TContext
-		>;
+		price?: LoaderResolver<Scalars["Float"], Product, {}, TContext>;
+		description?: LoaderResolver<Scalars["String"], Product, {}, TContext>;
+		category?: LoaderResolver<Category, Product, {}, TContext>;
 	};
 
 	Category?: {
+		id?: LoaderResolver<Scalars["ID"], Category, {}, TContext>;
 		title?: LoaderResolver<Scalars["String"], Category, {}, TContext>;
-		description?: LoaderResolver<Scalars["String"], Category, {}, TContext>;
 	};
 }
 declare module "mercurius" {

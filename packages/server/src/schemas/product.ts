@@ -1,10 +1,38 @@
+import { IResolvers } from "mercurius";
 import { gql } from "mercurius-codegen";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export const typeDef = gql`
+	extend type Query {
+		product(id: Int!): Product
+		products(categoryId: Int): [Product]
+	}
 	type Product {
+		id: ID!
 		title: String!
-		price: String!
-		short_description: String!
-		long_description: String
+		price: Float!
+		description: String!
+		category: Category!
 	}
 `;
+
+export const resolvers: IResolvers = {
+	Query: {
+		product: async (_, { id }) => {
+			return prisma.product.findUnique({
+				where: {
+					id,
+				},
+			});
+		},
+		products: async (_, { categoryId }: { categoryId?: number }) => {
+			return prisma.product.findMany({
+				where: {
+					categoryId,
+				},
+			});
+		},
+	},
+};

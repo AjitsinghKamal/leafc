@@ -2,7 +2,7 @@ import Fastify, { FastifyRequest } from "fastify";
 import mercurius from "mercurius";
 import mercuriusCodegen from "mercurius-codegen";
 
-import { mergedSchema as schema } from "./schemas";
+import { mergedSchema as schema, resolvers } from "./schemas";
 
 export const app = Fastify();
 
@@ -14,6 +14,7 @@ export const buildContext = async (req: FastifyRequest) => {
 
 app.register(mercurius, {
 	schema,
+	resolvers,
 	context: buildContext,
 	graphiql: "playground",
 	subscription: false,

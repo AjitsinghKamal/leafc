@@ -1,11 +1,12 @@
-import { typeDef as Product } from "./product";
+import { typeDef as Product, resolvers as ProductResolver } from "./product";
 import { typeDef as Category } from "./category";
 
 const Query = `
 	type Query {
-		product(id: Int!): Product
 		category(id: Int!): Category
+		categories: [Category!]!
 	}
 `;
 
 export const mergedSchema = [Query, Product, Category];
+export const resolvers = { ...ProductResolver };
