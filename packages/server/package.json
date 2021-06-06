@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"description": "Server implementation for LeafCommerce",
 	"scripts": {
-		"dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
+		"dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/main.ts",
 		"prettier": "prettier --write 'src/**/*.ts'",
 		"lint": "eslint 'src/**/*.ts' --fix",
 		"format": "npm run lint && npm run prettier"

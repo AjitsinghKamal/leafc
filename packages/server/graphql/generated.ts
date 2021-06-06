@@ -30,47 +30,32 @@ export type Scalars = {
 	_FieldSet: any;
 };
 
-export type Human = {
-	__typename?: "Human";
-	name: Scalars["String"];
-};
-
-export type Foo = {
-	__typename?: "Foo";
-	bars?: Maybe<Array<Maybe<Array<Maybe<Array<Maybe<Scalars["Int"]>>>>>>>;
-};
-
-export type Dog = {
-	__typename?: "Dog";
-	name: Scalars["String"];
-	owner?: Maybe<Human>;
-};
-
 export type Query = {
 	__typename?: "Query";
-	Hello: Scalars["String"];
-	dogs: Array<Dog>;
-	getFoo?: Maybe<Foo>;
+	product?: Maybe<Product>;
+	category?: Maybe<Category>;
 };
 
-export type Mutation = {
-	__typename?: "Mutation";
-	add: Scalars["Int"];
-	createNotification: Scalars["Boolean"];
+export type QueryproductArgs = {
+	id: Scalars["Int"];
 };
 
-export type MutationaddArgs = {
-	x: Scalars["Int"];
-	y: Scalars["Int"];
+export type QuerycategoryArgs = {
+	id: Scalars["Int"];
 };
 
-export type MutationcreateNotificationArgs = {
-	message: Scalars["String"];
+export type Product = {
+	__typename?: "Product";
+	title: Scalars["String"];
+	price: Scalars["String"];
+	short_description: Scalars["String"];
+	long_description?: Maybe<Scalars["String"]>;
 };
 
-export type Subscription = {
-	__typename?: "Subscription";
-	newNotification: Scalars["String"];
+export type Category = {
+	__typename?: "Category";
+	title: Scalars["String"];
+	description: Scalars["String"];
 };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -182,105 +167,74 @@ export type DirectiveResolverFn<
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-	Human: ResolverTypeWrapper<Human>;
-	String: ResolverTypeWrapper<Scalars["String"]>;
-	Foo: ResolverTypeWrapper<Foo>;
-	Int: ResolverTypeWrapper<Scalars["Int"]>;
-	Dog: ResolverTypeWrapper<Dog>;
 	Query: ResolverTypeWrapper<{}>;
-	Mutation: ResolverTypeWrapper<{}>;
+	Int: ResolverTypeWrapper<Scalars["Int"]>;
+	Product: ResolverTypeWrapper<Product>;
+	String: ResolverTypeWrapper<Scalars["String"]>;
+	Category: ResolverTypeWrapper<Category>;
 	Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
-	Subscription: ResolverTypeWrapper<{}>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-	Human: Human;
-	String: Scalars["String"];
-	Foo: Foo;
-	Int: Scalars["Int"];
-	Dog: Dog;
 	Query: {};
-	Mutation: {};
+	Int: Scalars["Int"];
+	Product: Product;
+	String: Scalars["String"];
+	Category: Category;
 	Boolean: Scalars["Boolean"];
-	Subscription: {};
-};
-
-export type HumanResolvers<
-	ContextType = MercuriusContext,
-	ParentType extends ResolversParentTypes["Human"] = ResolversParentTypes["Human"]
-> = {
-	name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-	isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type FooResolvers<
-	ContextType = MercuriusContext,
-	ParentType extends ResolversParentTypes["Foo"] = ResolversParentTypes["Foo"]
-> = {
-	bars?: Resolver<
-		Maybe<Array<Maybe<Array<Maybe<Array<Maybe<ResolversTypes["Int"]>>>>>>>,
-		ParentType,
-		ContextType
-	>;
-	isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type DogResolvers<
-	ContextType = MercuriusContext,
-	ParentType extends ResolversParentTypes["Dog"] = ResolversParentTypes["Dog"]
-> = {
-	name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-	owner?: Resolver<Maybe<ResolversTypes["Human"]>, ParentType, ContextType>;
-	isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type QueryResolvers<
 	ContextType = MercuriusContext,
 	ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
 > = {
-	Hello?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-	dogs?: Resolver<Array<ResolversTypes["Dog"]>, ParentType, ContextType>;
-	getFoo?: Resolver<Maybe<ResolversTypes["Foo"]>, ParentType, ContextType>;
-};
-
-export type MutationResolvers<
-	ContextType = MercuriusContext,
-	ParentType extends ResolversParentTypes["Mutation"] = ResolversParentTypes["Mutation"]
-> = {
-	add?: Resolver<
-		ResolversTypes["Int"],
+	product?: Resolver<
+		Maybe<ResolversTypes["Product"]>,
 		ParentType,
 		ContextType,
-		RequireFields<MutationaddArgs, "x" | "y">
+		RequireFields<QueryproductArgs, "id">
 	>;
-	createNotification?: Resolver<
-		ResolversTypes["Boolean"],
+	category?: Resolver<
+		Maybe<ResolversTypes["Category"]>,
 		ParentType,
 		ContextType,
-		RequireFields<MutationcreateNotificationArgs, "message">
+		RequireFields<QuerycategoryArgs, "id">
 	>;
 };
 
-export type SubscriptionResolvers<
+export type ProductResolvers<
 	ContextType = MercuriusContext,
-	ParentType extends ResolversParentTypes["Subscription"] = ResolversParentTypes["Subscription"]
+	ParentType extends ResolversParentTypes["Product"] = ResolversParentTypes["Product"]
 > = {
-	newNotification?: SubscriptionResolver<
+	title?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+	price?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+	short_description?: Resolver<
 		ResolversTypes["String"],
-		"newNotification",
 		ParentType,
 		ContextType
 	>;
+	long_description?: Resolver<
+		Maybe<ResolversTypes["String"]>,
+		ParentType,
+		ContextType
+	>;
+	isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CategoryResolvers<
+	ContextType = MercuriusContext,
+	ParentType extends ResolversParentTypes["Category"] = ResolversParentTypes["Category"]
+> = {
+	title?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+	description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+	isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = MercuriusContext> = {
-	Human?: HumanResolvers<ContextType>;
-	Foo?: FooResolvers<ContextType>;
-	Dog?: DogResolvers<ContextType>;
 	Query?: QueryResolvers<ContextType>;
-	Mutation?: MutationResolvers<ContextType>;
-	Subscription?: SubscriptionResolvers<ContextType>;
+	Product?: ProductResolvers<ContextType>;
+	Category?: CategoryResolvers<ContextType>;
 };
 
 /**
@@ -311,22 +265,26 @@ export interface Loaders<
 		reply: import("fastify").FastifyReply;
 	}
 > {
-	Human?: {
-		name?: LoaderResolver<Scalars["String"], Human, {}, TContext>;
-	};
-
-	Foo?: {
-		bars?: LoaderResolver<
-			Maybe<Array<Maybe<Array<Maybe<Scalars["Int"]>>>>>,
-			Foo,
+	Product?: {
+		title?: LoaderResolver<Scalars["String"], Product, {}, TContext>;
+		price?: LoaderResolver<Scalars["String"], Product, {}, TContext>;
+		short_description?: LoaderResolver<
+			Scalars["String"],
+			Product,
+			{},
+			TContext
+		>;
+		long_description?: LoaderResolver<
+			Maybe<Scalars["String"]>,
+			Product,
 			{},
 			TContext
 		>;
 	};
 
-	Dog?: {
-		name?: LoaderResolver<Scalars["String"], Dog, {}, TContext>;
-		owner?: LoaderResolver<Maybe<Human>, Dog, {}, TContext>;
+	Category?: {
+		title?: LoaderResolver<Scalars["String"], Category, {}, TContext>;
+		description?: LoaderResolver<Scalars["String"], Category, {}, TContext>;
 	};
 }
 declare module "mercurius" {

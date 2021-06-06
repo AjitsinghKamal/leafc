@@ -7,6 +7,7 @@
 		"baseUrl": "./src",
 	},
 	"include": [
+		"mercurius.d.ts",
 		"src/**/*.ts",
 	]
 }

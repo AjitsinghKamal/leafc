@@ -30,6 +30,7 @@
 		"quotes": [
 			"error",
 			"double"
-		]
+		],
+		"@typescript-eslint/explicit-module-boundary-types": "off"
 	}
 }
