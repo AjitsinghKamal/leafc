@@ -1,9 +1,18 @@
+import { gql } from "@apollo/client";
 import Head from "next/head";
-import css from "styles/Home.module.scss";
 
 import { ProductCard, Grid } from "components";
+import type { ProductCardType } from "components";
 
-export default function Home(): JSX.Element {
+import client from "graphql-client";
+
+import css from "styles/Home.module.scss";
+
+type Props = {
+	products: ProductCardType[];
+};
+
+export default function Home({ products }: Props) {
 	return (
 		<div className={css.container}>
 			<Head>
@@ -16,18 +25,41 @@ export default function Home(): JSX.Element {
 			<main>
 				<div>
 					<Grid>
-						{[
-							{
-								title: "Lorem",
-								category: "Ipsum",
-								price: 100,
-							},
-						].map((data, index) => (
-							<ProductCard key={index} {...data} />
+						{products.map((data) => (
+							<ProductCard key={data.id} {...data} />
 						))}
 					</Grid>
 				</div>
 			</main>
 		</div>
 	);
+}
+
+export async function getServerSideProps() {
+	try {
+		const {
+			data: { products },
+		} = await client.query({
+			query: gql`
+				query Products {
+					products {
+						id
+						title
+						price
+						image
+						category {
+							title
+						}
+					}
+				}
+			`,
+		});
+		return {
+			props: {
+				products,
+			},
+		};
+	} catch (e) {
+		console.error(e);
+	}
 }

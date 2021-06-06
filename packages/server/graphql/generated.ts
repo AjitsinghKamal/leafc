@@ -56,7 +56,8 @@ export type Product = {
 	title: Scalars["String"];
 	price: Scalars["Float"];
 	description: Scalars["String"];
-	category: Category;
+	category?: Maybe<Category>;
+	image: Scalars["String"];
 };
 
 export type Category = {
@@ -233,7 +234,12 @@ export type ProductResolvers<
 	title?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
 	price?: Resolver<ResolversTypes["Float"], ParentType, ContextType>;
 	description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-	category?: Resolver<ResolversTypes["Category"], ParentType, ContextType>;
+	category?: Resolver<
+		Maybe<ResolversTypes["Category"]>,
+		ParentType,
+		ContextType
+	>;
+	image?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
 	isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -285,7 +291,8 @@ export interface Loaders<
 		title?: LoaderResolver<Scalars["String"], Product, {}, TContext>;
 		price?: LoaderResolver<Scalars["Float"], Product, {}, TContext>;
 		description?: LoaderResolver<Scalars["String"], Product, {}, TContext>;
-		category?: LoaderResolver<Category, Product, {}, TContext>;
+		category?: LoaderResolver<Maybe<Category>, Product, {}, TContext>;
+		image?: LoaderResolver<Scalars["String"], Product, {}, TContext>;
 	};
 
 	Category?: {

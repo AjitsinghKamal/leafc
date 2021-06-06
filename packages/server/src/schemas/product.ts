@@ -14,7 +14,8 @@ export const typeDef = gql`
 		title: String!
 		price: Float!
 		description: String!
-		category: Category!
+		category: Category
+		image: String!
 	}
 `;
 
@@ -25,12 +26,18 @@ export const resolvers: IResolvers = {
 				where: {
 					id,
 				},
+				include: {
+					category: true,
+				},
 			});
 		},
 		products: async (_, { categoryId }: { categoryId?: number }) => {
 			return prisma.product.findMany({
 				where: {
 					categoryId,
+				},
+				include: {
+					category: true,
 				},
 			});
 		},

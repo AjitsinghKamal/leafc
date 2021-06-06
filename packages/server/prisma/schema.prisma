@@ -16,6 +16,7 @@ model Product {
     category    Category @relation(fields: [categoryId], references: [id])
     categoryId  Int
     price       Float    @default(0.00)
+    image       String   @default("")
 }
 
 model Category {
