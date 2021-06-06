@@ -11,6 +11,7 @@
 	"author": "ajitsinghkamal",
 	"license": "ISC",
 	"dependencies": {
+		"@prisma/client": "^2.24.1",
 		"fastify": "^3.17.0",
 		"mercurius": "^7.7.0"
 	},
