@@ -9,6 +9,7 @@
 	"scripts": {
 		"server:dev": "yarn workspace @leafc/server dev",
 		"server:lint": "yarn workspace @leafc/server lint",
+		"server:generate-schema": "yarn workspace @leafc/server prisma generate",
 		"server:prettier": "yarn workspace @leafc/server prettier",
 		"server:format": "yarn workspace @leafc/server format",
 		"client:dev": "yarn workspace @leafc/client dev"
