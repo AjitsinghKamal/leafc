@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 import Head from "next/head";
 
-import { ProductCard, Grid } from "components";
+import { ProductCard, Grid, DefaultLayout } from "components";
 import type { ProductCardType } from "components";
 
 import client from "graphql-client";
@@ -14,7 +14,7 @@ type Props = {
 
 export default function Home({ products }: Props) {
 	return (
-		<div className={css.container}>
+		<>
 			<Head>
 				<title>My page title</title>
 				<meta
@@ -22,16 +22,16 @@ export default function Home({ products }: Props) {
 					content="initial-scale=1.0, width=device-width"
 				/>
 			</Head>
-			<main>
-				<div>
+			<DefaultLayout>
+				<main className={css.container}>
 					<Grid>
 						{products.map((data) => (
 							<ProductCard key={data.id} {...data} />
 						))}
 					</Grid>
-				</div>
-			</main>
-		</div>
+				</main>
+			</DefaultLayout>
+		</>
 	);
 }
 

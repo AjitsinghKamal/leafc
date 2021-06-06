@@ -1,0 +1,7 @@
+@use "./palette";
+
+:root {
+	--header-ht: 80px;
+	--border-rd: 10px;
+	@include palette.default();
+}

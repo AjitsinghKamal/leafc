@@ -1,5 +1,9 @@
 .grid {
+	--grid-col-count: 5;
 	display: grid;
-	grid-template-rows: 5;
-	grid-template-columns: 5;
+	grid-template-columns: repeat(var(--grid-col-count), 1fr);
+	align-items: center;
+	justify-items: center;
+	grid-column-gap: 32px;
+	grid-row-gap: 32px;
 }

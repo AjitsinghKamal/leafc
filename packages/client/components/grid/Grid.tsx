@@ -1,7 +1,18 @@
-type Props = unknown;
+import css from "./Grid.module.scss";
 
-function Grid({ children }: React.PropsWithChildren<Props>): JSX.Element {
-	return <div>{children}</div>;
+type Props = {
+	style?: React.CSSProperties;
+};
+
+function Grid({
+	children,
+	style,
+}: React.PropsWithChildren<Props>): JSX.Element {
+	return (
+		<div className={css.grid} style={style || undefined}>
+			{children}
+		</div>
+	);
 }
 
 export default Grid;

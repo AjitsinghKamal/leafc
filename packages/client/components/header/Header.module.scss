@@ -1,0 +1,10 @@
+.header {
+	display: flex;
+	position: fixed;
+	height: var(--header-ht);
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
+	background: var(--bg);
+}
