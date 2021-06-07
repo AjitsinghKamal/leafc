@@ -21,7 +21,13 @@
 		"prettier/prettier": "error",
 		"indent": [
 			"error",
-			"tab"
+			"tab",
+			{
+				"offsetTernaryExpressions": true,
+				"ignoredNodes": [
+					"ConditionalExpression > ObjectExpresstion"
+				]
+			}
 		],
 		"linebreak-style": [
 			"error",

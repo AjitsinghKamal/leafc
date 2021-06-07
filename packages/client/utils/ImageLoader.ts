@@ -3,7 +3,6 @@ function ImageLoader({
 	width,
 	height,
 	quality = 80,
-	...rest
 }: {
 	src: string;
 	width: number;

@@ -34,7 +34,6 @@ export type Query = {
 	__typename?: "Query";
 	category?: Maybe<Category>;
 	categories: Array<Category>;
-	allProducts?: Maybe<Array<Maybe<Product>>>;
 	product?: Maybe<Product>;
 	products?: Maybe<Array<Maybe<Product>>>;
 };
@@ -211,11 +210,6 @@ export type QueryResolvers<
 	>;
 	categories?: Resolver<
 		Array<ResolversTypes["Category"]>,
-		ParentType,
-		ContextType
-	>;
-	allProducts?: Resolver<
-		Maybe<Array<Maybe<ResolversTypes["Product"]>>>,
 		ParentType,
 		ContextType
 	>;
