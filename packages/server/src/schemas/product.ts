@@ -6,8 +6,9 @@ const prisma = new PrismaClient();
 
 export const typeDef = gql`
 	extend type Query {
+		allProducts: [Product]
 		product(id: Int!): Product
-		products(categoryId: Int): [Product]
+		products(categoryId: Int, searchTxt: String): [Product]
 	}
 	type Product {
 		id: ID!
@@ -31,10 +32,35 @@ export const resolvers: IResolvers = {
 				},
 			});
 		},
-		products: async (_, { categoryId }: { categoryId?: number }) => {
+		allProducts: async () => {
+			return prisma.product.findMany({
+				include: {
+					category: true,
+				},
+			});
+		},
+		products: async (
+			_,
+			{
+				categoryId,
+				searchTxt,
+			}: { categoryId?: number; searchTxt?: string }
+		) => {
 			return prisma.product.findMany({
 				where: {
-					categoryId,
+					OR: [
+						{ categoryId },
+						{
+							title: {
+								contains: searchTxt,
+							},
+						},
+						{
+							description: {
+								contains: searchTxt,
+							},
+						},
+					],
 				},
 				include: {
 					category: true,

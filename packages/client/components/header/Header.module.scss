@@ -1,10 +1,18 @@
 .header {
-	display: flex;
 	position: fixed;
-	height: var(--header-ht);
 	top: 0;
 	left: 0;
 	right: 0;
 	z-index: 100;
+	display: flex;
+	margin: 0 auto;
+	align-items: center;
+	height: var(--header-ht);
+	max-width: var(--container-wd);
 	background: var(--bg);
+	padding: 0 var(--container-pd);
+	&_searchbar {
+		width: 80%;
+		max-width: 600px;
+	}
 }

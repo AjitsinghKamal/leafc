@@ -34,6 +34,7 @@ export type Query = {
 	__typename?: "Query";
 	category?: Maybe<Category>;
 	categories: Array<Category>;
+	allProducts?: Maybe<Array<Maybe<Product>>>;
 	product?: Maybe<Product>;
 	products?: Maybe<Array<Maybe<Product>>>;
 };
@@ -48,6 +49,7 @@ export type QueryproductArgs = {
 
 export type QueryproductsArgs = {
 	categoryId?: Maybe<Scalars["Int"]>;
+	searchTxt?: Maybe<Scalars["String"]>;
 };
 
 export type Product = {
@@ -177,9 +179,9 @@ export type DirectiveResolverFn<
 export type ResolversTypes = {
 	Query: ResolverTypeWrapper<{}>;
 	Int: ResolverTypeWrapper<Scalars["Int"]>;
+	String: ResolverTypeWrapper<Scalars["String"]>;
 	Product: ResolverTypeWrapper<Product>;
 	ID: ResolverTypeWrapper<Scalars["ID"]>;
-	String: ResolverTypeWrapper<Scalars["String"]>;
 	Float: ResolverTypeWrapper<Scalars["Float"]>;
 	Category: ResolverTypeWrapper<Category>;
 	Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
@@ -189,9 +191,9 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
 	Query: {};
 	Int: Scalars["Int"];
+	String: Scalars["String"];
 	Product: Product;
 	ID: Scalars["ID"];
-	String: Scalars["String"];
 	Float: Scalars["Float"];
 	Category: Category;
 	Boolean: Scalars["Boolean"];
@@ -209,6 +211,11 @@ export type QueryResolvers<
 	>;
 	categories?: Resolver<
 		Array<ResolversTypes["Category"]>,
+		ParentType,
+		ContextType
+	>;
+	allProducts?: Resolver<
+		Maybe<Array<Maybe<ResolversTypes["Product"]>>>,
 		ParentType,
 		ContextType
 	>;

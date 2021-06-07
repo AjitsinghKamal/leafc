@@ -1,4 +1,6 @@
 .container {
 	min-height: 100vh;
-	padding: 0 32px;
+	padding: var(--container-pd);
+	max-width: var(--container-wd);
+	margin: 0 auto;
 }

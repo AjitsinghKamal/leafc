@@ -1,7 +1,9 @@
 @use "./palette";
 
 :root {
-	--header-ht: 80px;
+	--header-ht: 100px;
 	--border-rd: 10px;
+	--container-wd: 1400px;
+	--container-pd: 32px;
 	@include palette.default();
 }
