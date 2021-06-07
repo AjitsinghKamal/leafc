@@ -1,7 +1,11 @@
 export { default as ProductCard } from "./product-card/ProductCard";
 export { default as Grid } from "./grid/Grid";
 export { default as Header } from "./header/Header";
+export type { Props as HeaderProps } from "./header/Header";
 export { default as DefaultLayout } from "./default-layout/DefaultLayout";
 export { default as Input } from "./input/Input";
 export { default as CartItem } from "./cart/CartItem";
 export { default as SearchBar } from "./searchbar/SearchBar";
+export { default as CartDetail } from "./cart-details/CartDetails";
+export { default as OrderForm } from "./order-form/OrderForm";
+export { default as Placeholder } from "./placeholder/Placeholder";

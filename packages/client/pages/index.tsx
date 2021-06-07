@@ -23,7 +23,7 @@ export default function Home({ products }: Props) {
 				<title>My page title</title>
 			</Head>
 			<DefaultLayout>
-				<main className={css.container}>
+				<main className="pageContainer">
 					<section className={css.meta}>
 						<h3>
 							{router.query.search

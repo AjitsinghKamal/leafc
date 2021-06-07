@@ -27,16 +27,6 @@
 		"prettier/prettier": "error",
 		"react/react-in-jsx-scope": "off",
 		"@typescript-eslint/explicit-module-boundary-types": "off",
-		"indent": [
-			"error",
-			"tab",
-			{
-				"offsetTernaryExpressions": true,
-				"ignoredNodes": [
-					"ConditionalExpression > ObjectExpresstion"
-				]
-			}
-		],
 		"linebreak-style": [
 			"error",
 			"unix"

@@ -1,0 +1,19 @@
+.placeholder {
+	max-width: 600px;
+	height: 150px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 0 0 1px var(--dark100);
+	&_msg {
+		font-size: 1.2rem;
+		margin: 8px;
+		opacity: 0.6;
+		font-weight: 600;
+	}
+	&_icon {
+		width: 42px;
+		height: 42px;
+	}
+}

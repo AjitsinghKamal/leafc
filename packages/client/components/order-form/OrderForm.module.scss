@@ -1,0 +1,24 @@
+.details,
+.details_form {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.details_form {
+	max-height: 550px;
+	padding-bottom: 32px;
+}
+
+.details {
+	&_btn {
+		background: var(--grn500);
+		padding: 12px;
+		border-radius: 10px;
+		justify-self: stretch;
+		width: 100%;
+		font-weight: 600;
+		font-size: 1.2rem;
+		margin-top: auto;
+	}
+}

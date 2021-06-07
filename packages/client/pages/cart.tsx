@@ -1,7 +1,13 @@
 import Head from "next/head";
-import { CartItem, DefaultLayout } from "components";
+import {
+	CartItem,
+	DefaultLayout,
+	CartDetail,
+	OrderForm,
+	Placeholder,
+} from "components";
 import { useCartStore } from "stores";
-
+import cx from "classnames";
 import css from "styles/Cart.module.scss";
 
 export default function Cart() {
@@ -18,14 +24,24 @@ export default function Cart() {
 					content="initial-scale=1.0, width=device-width"
 				/>
 			</Head>
-			<DefaultLayout>
-				<div className={css.cart}>
+			<DefaultLayout hideCartAction>
+				<div className={cx("pageContainer", css.cart)}>
 					<main>
-						{ids.map((itemId) => {
-							return <CartItem {...items[itemId]} key={itemId} />;
-						})}
+						{ids.length ? (
+							ids.map((itemId) => {
+								return (
+									<CartItem {...items[itemId]} key={itemId} />
+								);
+							})
+						) : (
+							<Placeholder msg="You haven't added any item to the cart yet!" />
+						)}
 					</main>
-					<aside></aside>
+					<aside>
+						<CartDetail totalAmount={100}>
+							<OrderForm />
+						</CartDetail>
+					</aside>
 				</div>
 			</DefaultLayout>
 		</>
