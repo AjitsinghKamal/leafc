@@ -1,13 +1,25 @@
 import create from "zustand";
-import type { ProductCardType } from "components";
 
-type CartItem = ProductCardType & {
-	quantity: number;
-	id: number;
-};
+/** ---------------------
+ * state slice for shopping cart
+ * keeps track of active cart items
+ *
+ */
+
 type CartState = {
+	/**
+	 * map of product detail and product id
+	 * used for constant time access of cart item details
+	 */
 	products: Record<string, CartItem>;
+	/**
+	 * list of products ids in order of addition to the cart
+	 * allows for straight-forward iteration
+	 */
 	productsIdOrder: string[];
+	/**
+	 * mutation for updating particular cartitems quantity
+	 */
 	changeProductQuantity: (T: string, C: number) => void;
 	addProducts: (T: CartItem) => void;
 	removeProducts: (T: string) => void;
@@ -16,23 +28,32 @@ type CartState = {
 const useCartStore = create<CartState>((set) => ({
 	productsIdOrder: [],
 	products: {},
-	changeProductQuantity: (productId, newCount) =>
-		set((state) => {
-			return {
-				products: {
-					...state.products,
-					[productId]: {
-						...state.products[productId],
-						quantity: newCount,
+	changeProductQuantity: (productId, newCount) => {
+		if (newCount > 0) {
+			return set((state) => {
+				return {
+					products: {
+						...state.products,
+						[productId]: {
+							...state.products[productId],
+							quantity: newCount,
+						},
 					},
-				},
-			};
-		}),
+				};
+			});
+		}
+	},
 	addProducts: (newItem) =>
 		set((state) => {
 			return {
 				productsIdOrder: [...state.productsIdOrder, newItem.id],
-				products: { ...state.products, [newItem.id]: newItem },
+				products: {
+					...state.products,
+					[newItem.id]: {
+						...newItem,
+						quantity: newItem.quantity || 1,
+					},
+				},
 			};
 		}),
 	removeProducts: (item) =>

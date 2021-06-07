@@ -1,34 +1,33 @@
+import cx from "classnames";
 import Image from "next/image";
 import ImageLoader from "utils/ImageLoader";
 
 import css from "./ProductCard.module.scss";
 
-export type Props = {
-	id?: string;
-	title: string;
-	price: number;
-	category: {
-		title: string;
-	};
-	image: string;
+export type Props = ProductType & {
+	onClick?: (K: ProductType) => void;
 };
 
 function ProductCard({
+	id,
 	title,
 	price,
 	category,
 	image,
 	onClick,
-}: Props & {
-	onClick: () => void;
-}): JSX.Element {
+}: Props): JSX.Element {
+	const handleClick = () => {
+		onClick && onClick({ id, title, price, image, category });
+	};
 	return (
-		<div className={css.card}>
-			<div className={css.card_pricecontainer}>
-				<span className={css.card_pricecontainer_cost}>$ {price}</span>
-				<div className={css.card_backdrop}></div>
+		<div className={cx(css.card, css.product)}>
+			<div className={css.product_pricecontainer}>
+				<span className={css.product_pricecontainer_cost}>
+					$ {price}
+				</span>
+				<div className={css.product_backdrop}></div>
 				<Image
-					className={css.card_image}
+					className={css.product_image}
 					loader={ImageLoader}
 					src={image}
 					alt={title}
@@ -36,9 +35,9 @@ function ProductCard({
 					height={260}
 				/>
 			</div>
-			<span className={css.card_category}>{category.title}</span>
-			<span className={css.card_title}>{title}</span>
-			<button onClick={onClick}>Add to Cart</button>
+			<span className={css.product_category}>{category.title}</span>
+			<span className={css.product_title}>{title}</span>
+			<button onClick={handleClick}>Add to Cart</button>
 		</div>
 	);
 }

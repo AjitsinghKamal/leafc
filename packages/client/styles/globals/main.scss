@@ -1,6 +1,6 @@
-@use "./normalize";
-@use "./tokens";
-
+@use "normalize";
+@use "tokens";
+@use "utilities";
 body {
 	margin: 0;
 	font-weight: 400;

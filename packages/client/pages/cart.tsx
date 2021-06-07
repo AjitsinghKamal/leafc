@@ -1,5 +1,5 @@
 import Head from "next/head";
-
+import { CartItem } from "components";
 import useCartStore from "stores/cart";
 
 export default function Cart() {
@@ -18,7 +18,7 @@ export default function Cart() {
 			</Head>
 			<main>
 				{ids.map((itemId) => {
-					<div>{items[itemId].title}</div>;
+					return <CartItem {...items[itemId]} key={itemId} />;
 				})}
 			</main>
 		</>

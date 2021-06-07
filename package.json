@@ -12,7 +12,8 @@
 		"server:generate-schema": "yarn workspace @leafc/server prisma generate",
 		"server:prettier": "yarn workspace @leafc/server prettier",
 		"server:format": "yarn workspace @leafc/server format",
-		"client:dev": "yarn workspace @leafc/client dev"
+		"client:dev": "yarn workspace @leafc/client dev",
+		"client:test": "yarn workspace @leafc/client test"
 	},
 	"license": "ISC"
 }

@@ -1,30 +1,17 @@
-import { gql, request } from "graphql-request";
+import { request } from "graphql-request";
 import Head from "next/head";
 
 import { ProductCard, Grid, DefaultLayout } from "components";
-import type { ProductCardType } from "components";
 
 import useSearchStore from "stores/search";
 import useShopStore from "stores/shop";
 import css from "styles/Home.module.scss";
+import useCartStore from "stores/cart";
 
 type Props = {
-	allProducts: ProductCardType[];
+	allProducts: ProductType[];
 };
 
-const GET_ALL_PRODUCTS = gql`
-	query Products {
-		allProducts {
-			id
-			title
-			price
-			image
-			category {
-				title
-			}
-		}
-	}
-`;
 export default function Home({ allProducts }: Props) {
 	const searchText = useSearchStore((state) => state.searchInput);
 	const products = useShopStore((state) => {
@@ -32,7 +19,7 @@ export default function Home({ allProducts }: Props) {
 			? state.products
 			: allProducts;
 	});
-
+	const addToCart = useCartStore((state) => state.addProducts);
 	return (
 		<>
 			<Head>
@@ -46,7 +33,11 @@ export default function Home({ allProducts }: Props) {
 				<main className={css.container}>
 					<Grid>
 						{products.map((data) => (
-							<ProductCard key={data.id} {...data} />
+							<ProductCard
+								key={data.id}
+								{...data}
+								onClick={addToCart}
+							/>
 						))}
 					</Grid>
 				</main>

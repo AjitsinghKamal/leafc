@@ -1,10 +1,9 @@
 import create from "zustand";
-import type { ProductCardType } from "components";
 
 type ShopState = {
-	products: ProductCardType[];
+	products: ProductType[];
 	loading: boolean;
-	updateProducts: (T: ProductCardType[]) => void;
+	updateProducts: (T: ProductType[]) => void;
 	setLoading: (T: boolean) => void;
 };
 const useShopStore = create<ShopState>((set) => ({
