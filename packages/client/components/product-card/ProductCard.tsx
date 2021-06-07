@@ -13,7 +13,15 @@ export type Props = {
 	image: string;
 };
 
-function ProductCard({ title, price, category, image }: Props): JSX.Element {
+function ProductCard({
+	title,
+	price,
+	category,
+	image,
+	onClick,
+}: Props & {
+	onClick: () => void;
+}): JSX.Element {
 	return (
 		<div className={css.card}>
 			<div className={css.card_pricecontainer}>
@@ -30,6 +38,7 @@ function ProductCard({ title, price, category, image }: Props): JSX.Element {
 			</div>
 			<span className={css.card_category}>{category.title}</span>
 			<span className={css.card_title}>{title}</span>
+			<button onClick={onClick}>Add to Cart</button>
 		</div>
 	);
 }

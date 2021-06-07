@@ -4,8 +4,6 @@ import Head from "next/head";
 import { ProductCard, Grid, DefaultLayout } from "components";
 import type { ProductCardType } from "components";
 
-import client from "graphql/client";
-
 import useSearchStore from "stores/search";
 import useShopStore from "stores/shop";
 import css from "styles/Home.module.scss";
@@ -34,6 +32,7 @@ export default function Home({ allProducts }: Props) {
 			? state.products
 			: allProducts;
 	});
+
 	return (
 		<>
 			<Head>

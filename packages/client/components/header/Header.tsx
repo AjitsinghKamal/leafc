@@ -1,9 +1,11 @@
+import { useRouter } from "next/router";
 import { Input } from "components";
 import css from "./Header.module.scss";
 
 import useProductSearch from "hooks/useProductSearch";
 
 function Header() {
+	const router = useRouter();
 	const { searchText, updateSearchText, shouldFetchResult } =
 		useProductSearch();
 
@@ -16,6 +18,10 @@ function Header() {
 		shouldFetchResult();
 	};
 
+	const redirectToCart = () => {
+		router.push("/cart");
+	};
+
 	return (
 		<header className={css.header}>
 			<form onSubmit={handleSubmit} className={css.header_searchbar}>
@@ -26,6 +32,9 @@ function Header() {
 					onChange={handleInputChange}
 				/>
 			</form>
+			<button onClick={redirectToCart} className={css.header_cartbtn}>
+				Your Cart
+			</button>
 		</header>
 	);
 }
