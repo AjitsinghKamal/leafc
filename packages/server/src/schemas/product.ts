@@ -1,8 +1,6 @@
 import { IResolvers } from "mercurius";
 import { gql } from "mercurius-codegen";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "../client";
 
 export const typeDef = gql`
 	extend type Query {

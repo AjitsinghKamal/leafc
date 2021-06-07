@@ -1,4 +1,8 @@
-import type { GraphQLResolveInfo } from "graphql";
+import type {
+	GraphQLResolveInfo,
+	GraphQLScalarType,
+	GraphQLScalarTypeConfig,
+} from "graphql";
 import type { MercuriusContext } from "mercurius";
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -27,6 +31,8 @@ export type Scalars = {
 	Boolean: boolean;
 	Int: number;
 	Float: number;
+	/** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
+	DateTime: any;
 	_FieldSet: any;
 };
 
@@ -36,6 +42,7 @@ export type Query = {
 	categories: Array<Category>;
 	product?: Maybe<Product>;
 	products?: Maybe<Array<Maybe<Product>>>;
+	order?: Maybe<Order>;
 };
 
 export type QuerycategoryArgs = {
@@ -51,6 +58,22 @@ export type QueryproductsArgs = {
 	searchTxt?: Maybe<Scalars["String"]>;
 };
 
+export type QueryorderArgs = {
+	id: Scalars["Int"];
+};
+
+export type Mutation = {
+	__typename?: "Mutation";
+	postOrder?: Maybe<Order>;
+};
+
+export type MutationpostOrderArgs = {
+	email: Scalars["String"];
+	address: Scalars["String"];
+	price: Scalars["Float"];
+	items: Array<Maybe<OrderItemInput>>;
+};
+
 export type Product = {
 	__typename?: "Product";
 	id: Scalars["ID"];
@@ -59,6 +82,30 @@ export type Product = {
 	description: Scalars["String"];
 	category?: Maybe<Category>;
 	image: Scalars["String"];
+};
+
+export type Order = {
+	__typename?: "Order";
+	id: Scalars["ID"];
+	email: Scalars["String"];
+	address: Scalars["String"];
+	createdAt: Scalars["DateTime"];
+	updatedAt: Scalars["DateTime"];
+	price: Scalars["Float"];
+	items: Array<OrderItem>;
+};
+
+export type OrderItemInput = {
+	productId: Scalars["Int"];
+	price: Scalars["Float"];
+	quantity: Scalars["Int"];
+};
+
+export type OrderItem = {
+	__typename?: "OrderItem";
+	productId: Scalars["Int"];
+	price: Scalars["Float"];
+	quantity: Scalars["Int"];
 };
 
 export type Category = {
@@ -179,9 +226,14 @@ export type ResolversTypes = {
 	Query: ResolverTypeWrapper<{}>;
 	Int: ResolverTypeWrapper<Scalars["Int"]>;
 	String: ResolverTypeWrapper<Scalars["String"]>;
+	Mutation: ResolverTypeWrapper<{}>;
+	Float: ResolverTypeWrapper<Scalars["Float"]>;
+	DateTime: ResolverTypeWrapper<Scalars["DateTime"]>;
 	Product: ResolverTypeWrapper<Product>;
 	ID: ResolverTypeWrapper<Scalars["ID"]>;
-	Float: ResolverTypeWrapper<Scalars["Float"]>;
+	Order: ResolverTypeWrapper<Order>;
+	OrderItemInput: OrderItemInput;
+	OrderItem: ResolverTypeWrapper<OrderItem>;
 	Category: ResolverTypeWrapper<Category>;
 	Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
 };
@@ -191,9 +243,14 @@ export type ResolversParentTypes = {
 	Query: {};
 	Int: Scalars["Int"];
 	String: Scalars["String"];
+	Mutation: {};
+	Float: Scalars["Float"];
+	DateTime: Scalars["DateTime"];
 	Product: Product;
 	ID: Scalars["ID"];
-	Float: Scalars["Float"];
+	Order: Order;
+	OrderItemInput: OrderItemInput;
+	OrderItem: OrderItem;
 	Category: Category;
 	Boolean: Scalars["Boolean"];
 };
@@ -225,7 +282,33 @@ export type QueryResolvers<
 		ContextType,
 		RequireFields<QueryproductsArgs, never>
 	>;
+	order?: Resolver<
+		Maybe<ResolversTypes["Order"]>,
+		ParentType,
+		ContextType,
+		RequireFields<QueryorderArgs, "id">
+	>;
 };
+
+export type MutationResolvers<
+	ContextType = MercuriusContext,
+	ParentType extends ResolversParentTypes["Mutation"] = ResolversParentTypes["Mutation"]
+> = {
+	postOrder?: Resolver<
+		Maybe<ResolversTypes["Order"]>,
+		ParentType,
+		ContextType,
+		RequireFields<
+			MutationpostOrderArgs,
+			"email" | "address" | "price" | "items"
+		>
+	>;
+};
+
+export interface DateTimeScalarConfig
+	extends GraphQLScalarTypeConfig<ResolversTypes["DateTime"], any> {
+	name: "DateTime";
+}
 
 export type ProductResolvers<
 	ContextType = MercuriusContext,
@@ -244,6 +327,34 @@ export type ProductResolvers<
 	isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type OrderResolvers<
+	ContextType = MercuriusContext,
+	ParentType extends ResolversParentTypes["Order"] = ResolversParentTypes["Order"]
+> = {
+	id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+	email?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+	address?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+	createdAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+	updatedAt?: Resolver<ResolversTypes["DateTime"], ParentType, ContextType>;
+	price?: Resolver<ResolversTypes["Float"], ParentType, ContextType>;
+	items?: Resolver<
+		Array<ResolversTypes["OrderItem"]>,
+		ParentType,
+		ContextType
+	>;
+	isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type OrderItemResolvers<
+	ContextType = MercuriusContext,
+	ParentType extends ResolversParentTypes["OrderItem"] = ResolversParentTypes["OrderItem"]
+> = {
+	productId?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+	price?: Resolver<ResolversTypes["Float"], ParentType, ContextType>;
+	quantity?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+	isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type CategoryResolvers<
 	ContextType = MercuriusContext,
 	ParentType extends ResolversParentTypes["Category"] = ResolversParentTypes["Category"]
@@ -255,7 +366,11 @@ export type CategoryResolvers<
 
 export type Resolvers<ContextType = MercuriusContext> = {
 	Query?: QueryResolvers<ContextType>;
+	Mutation?: MutationResolvers<ContextType>;
+	DateTime?: GraphQLScalarType;
 	Product?: ProductResolvers<ContextType>;
+	Order?: OrderResolvers<ContextType>;
+	OrderItem?: OrderItemResolvers<ContextType>;
 	Category?: CategoryResolvers<ContextType>;
 };
 
@@ -294,6 +409,22 @@ export interface Loaders<
 		description?: LoaderResolver<Scalars["String"], Product, {}, TContext>;
 		category?: LoaderResolver<Maybe<Category>, Product, {}, TContext>;
 		image?: LoaderResolver<Scalars["String"], Product, {}, TContext>;
+	};
+
+	Order?: {
+		id?: LoaderResolver<Scalars["ID"], Order, {}, TContext>;
+		email?: LoaderResolver<Scalars["String"], Order, {}, TContext>;
+		address?: LoaderResolver<Scalars["String"], Order, {}, TContext>;
+		createdAt?: LoaderResolver<Scalars["DateTime"], Order, {}, TContext>;
+		updatedAt?: LoaderResolver<Scalars["DateTime"], Order, {}, TContext>;
+		price?: LoaderResolver<Scalars["Float"], Order, {}, TContext>;
+		items?: LoaderResolver<Array<OrderItem>, Order, {}, TContext>;
+	};
+
+	OrderItem?: {
+		productId?: LoaderResolver<Scalars["Int"], OrderItem, {}, TContext>;
+		price?: LoaderResolver<Scalars["Float"], OrderItem, {}, TContext>;
+		quantity?: LoaderResolver<Scalars["Int"], OrderItem, {}, TContext>;
 	};
 
 	Category?: {

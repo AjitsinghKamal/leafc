@@ -35,4 +35,6 @@ mercuriusCodegen(app, {
 	targetPath: "./graphql/generated.ts",
 }).catch(console.error);
 
-app.listen(8000);
+app.listen(8000).then(() =>
+	console.log("🚀 Server ready at http://localhost:8000/playground")
+);
