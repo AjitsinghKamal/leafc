@@ -1,67 +1,69 @@
-import { request } from "graphql-request";
+import { GetServerSideProps } from "next";
+import { useRouter } from "next/router";
 import Head from "next/head";
 
 import { ProductCard, Grid, DefaultLayout } from "components";
-
-import useSearchStore from "stores/search";
-import useShopStore from "stores/shop";
+import { useCartStore } from "stores";
 import css from "styles/Home.module.scss";
-import useCartStore from "stores/cart";
+
+import { clientSsr } from "graphql/client";
+import { GET_PRODUCTS } from "graphql/queries";
 
 type Props = {
-	allProducts: ProductType[];
+	products: ProductType[];
 };
 
-export default function Home({ allProducts }: Props) {
-	const searchText = useSearchStore((state) => state.searchInput);
-	const products = useShopStore((state) => {
-		return state.products && state.products.length
-			? state.products
-			: allProducts;
-	});
+export default function Home({ products }: Props) {
 	const addToCart = useCartStore((state) => state.addProducts);
+	const router = useRouter();
+
 	return (
 		<>
 			<Head>
 				<title>My page title</title>
-				<meta
-					name="viewport"
-					content="initial-scale=1.0, width=device-width"
-				/>
 			</Head>
 			<DefaultLayout>
 				<main className={css.container}>
-					<Grid>
-						{products.map((data) => (
-							<ProductCard
-								key={data.id}
-								{...data}
-								onClick={addToCart}
-							/>
-						))}
-					</Grid>
+					<section className={css.meta}>
+						<h3>
+							{router.query.search
+								? `Plants matching "${router.query.search}"`
+								: "All Our Plants"}
+						</h3>
+					</section>
+					<section>
+						<Grid>
+							{products.map((data) => (
+								<ProductCard
+									key={data.id}
+									{...data}
+									onClick={addToCart}
+								/>
+							))}
+						</Grid>
+					</section>
 				</main>
 			</DefaultLayout>
 		</>
 	);
 }
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 	try {
-		const { allProducts } = await request(
-			`${process.env.HOST}/graphql`,
-			GET_ALL_PRODUCTS
-		);
+		const { products } = await clientSsr.request(GET_PRODUCTS, {
+			by: query.search || "",
+		});
 		return {
 			props: {
-				allProducts,
+				products,
 			},
 		};
 	} catch (e) {
+		console.log(e);
 		return {
 			props: {
-				allProducts: [],
+				products: [],
 			},
 		};
 	}
-}
+};

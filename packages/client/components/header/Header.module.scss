@@ -11,10 +11,6 @@
 	max-width: var(--container-wd);
 	background: var(--bg);
 	padding: 0 var(--container-pd);
-	&_searchbar {
-		width: 80%;
-		max-width: 600px;
-	}
 	&_cartbtn {
 		margin-left: auto;
 		background: var(--blue200);

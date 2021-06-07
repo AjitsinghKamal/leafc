@@ -1,6 +1,8 @@
 import Head from "next/head";
-import { CartItem } from "components";
-import useCartStore from "stores/cart";
+import { CartItem, DefaultLayout } from "components";
+import { useCartStore } from "stores";
+
+import css from "styles/Cart.module.scss";
 
 export default function Cart() {
 	const [items, ids] = useCartStore((state) => [
@@ -16,11 +18,16 @@ export default function Cart() {
 					content="initial-scale=1.0, width=device-width"
 				/>
 			</Head>
-			<main>
-				{ids.map((itemId) => {
-					return <CartItem {...items[itemId]} key={itemId} />;
-				})}
-			</main>
+			<DefaultLayout>
+				<div className={css.cart}>
+					<main>
+						{ids.map((itemId) => {
+							return <CartItem {...items[itemId]} key={itemId} />;
+						})}
+					</main>
+					<aside></aside>
+				</div>
+			</DefaultLayout>
 		</>
 	);
 }

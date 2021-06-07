@@ -3,24 +3,17 @@ import Image from "next/image";
 import ImageLoader from "utils/ImageLoader";
 
 import css from "./ProductCard.module.scss";
-
+import BagIcon from "assets/cart.svg";
 export type Props = ProductType & {
 	onClick?: (K: ProductType) => void;
 };
 
-function ProductCard({
-	id,
-	title,
-	price,
-	category,
-	image,
-	onClick,
-}: Props): JSX.Element {
+function ProductCard({ id, title, price, category, image, onClick }: Props) {
 	const handleClick = () => {
 		onClick && onClick({ id, title, price, image, category });
 	};
 	return (
-		<div className={cx(css.card, css.product)}>
+		<div className={cx("card", css.product)}>
 			<div className={css.product_pricecontainer}>
 				<span className={css.product_pricecontainer_cost}>
 					$ {price}
@@ -35,9 +28,14 @@ function ProductCard({
 					height={260}
 				/>
 			</div>
-			<span className={css.product_category}>{category.title}</span>
+			<div className={css.product_meta}>
+				<span className={css.product_category}>{category.title}</span>
+				<button onClick={handleClick} className={css.product_btn___add}>
+					<BagIcon className={css.icon} />
+					Add
+				</button>
+			</div>
 			<span className={css.product_title}>{title}</span>
-			<button onClick={handleClick}>Add to Cart</button>
 		</div>
 	);
 }

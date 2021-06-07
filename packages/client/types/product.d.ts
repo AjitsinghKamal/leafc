@@ -6,6 +6,7 @@ type ProductType = {
 		title: string;
 	};
 	image: string;
+	description?: string;
 };
 type CartItem = ProductType & {
 	quantity?: number;
