@@ -1,7 +1,8 @@
-import { IResolvers } from "mercurius";
+import mercurius, { IResolvers } from "mercurius";
 import { gql } from "mercurius-codegen";
 import { prisma } from "../client";
-
+import { emailRegexp } from "../utils/regex";
+const { ErrorWithProps } = mercurius;
 export const typeDef = gql`
 	extend type Query {
 		order(id: Int!): Order
@@ -40,6 +41,13 @@ export const resolvers: IResolvers = {
 	},
 	Mutation: {
 		postOrder: async (_, { email, address, price, items }) => {
+			const isValid = emailRegexp.test(email);
+			if (!isValid) {
+				throw new ErrorWithProps("Invalid Email Id", {
+					email,
+					timestamp: Math.round(new Date().getTime() / 1000),
+				});
+			}
 			return prisma.order.create({
 				data: {
 					email,
