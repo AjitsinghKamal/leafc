@@ -1,8 +1,7 @@
 ### Leaf Commerce
 
 ![Screenshot 2021-06-08 at 09 56 28](https://user-images.githubusercontent.com/18217523/121124996-710d6780-c843-11eb-9553-e55794a60a0c.png)
-![Screenshot 2021-06-08 at 10 23 08](https://user-images.githubusercontent.com/18217523/121125107-a0bc6f80-c843-11eb-8b27-4d4791a5a7a9.png)
-![Screenshot 2021-06-08 at 10 23 30](https://user-images.githubusercontent.com/18217523/121125121-a3b76000-c843-11eb-805e-e33e759158c6.png)
+
 
 
 This is a monorepo for a simple ecommerce shopping application.
@@ -63,3 +62,9 @@ _Styling_ is done with CSS modules using SCSS as the preprocessor.
 _Since a very simple state management solution was needed_, I am **not using Apollo Client** for making `gql` queries instead `graphql-request` is used.
 
 _Testing_. Jest and Testing-library are setup with few test cases written. The app still needs to increase test-coverage.
+
+
+### Other Screenshots
+
+![Screenshot 2021-06-08 at 10 23 08](https://user-images.githubusercontent.com/18217523/121125107-a0bc6f80-c843-11eb-8b27-4d4791a5a7a9.png)
+![Screenshot 2021-06-08 at 10 23 30](https://user-images.githubusercontent.com/18217523/121125121-a3b76000-c843-11eb-805e-e33e759158c6.png)
