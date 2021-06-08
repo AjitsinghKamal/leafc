@@ -1,5 +1,12 @@
 .cart {
-	display: grid;
-	grid-template-columns: 1fr 0.8fr;
+	display: flex;
+	flex-flow: row wrap;
 	padding: var(--container-pd);
+	&_col {
+		min-width: 400px;
+		max-width: 95%;
+		&:last-child {
+			margin-left: 16px;
+		}
+	}
 }

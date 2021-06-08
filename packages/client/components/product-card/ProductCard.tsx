@@ -8,7 +8,15 @@ export type Props = ProductType & {
 	onClick?: (K: ProductType) => void;
 };
 
-function ProductCard({ id, title, price, category, image, onClick }: Props) {
+function ProductCard({
+	id,
+	title,
+	price,
+	category,
+	image,
+	onClick,
+	description,
+}: Props) {
 	const handleClick = () => {
 		onClick && onClick({ id, title, price, image, category });
 	};
@@ -36,6 +44,7 @@ function ProductCard({ id, title, price, category, image, onClick }: Props) {
 				</button>
 			</div>
 			<span className={css.product_title}>{title}</span>
+			<span className={css.product_description}>{description}</span>
 		</div>
 	);
 }

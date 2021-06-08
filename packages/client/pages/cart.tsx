@@ -133,7 +133,7 @@ export default function Cart() {
 				overrideNav={<NavBtn to="/">Go Back To Home</NavBtn>}
 			>
 				<div className={cx("pageContainer", css.cart)}>
-					<main>
+					<main className={css.cart_col}>
 						{ids.length ? (
 							ids.map((itemId) => {
 								return (
@@ -158,7 +158,7 @@ export default function Cart() {
 							/>
 						)}
 					</main>
-					<aside>
+					<aside className={css.cart_col}>
 						<CartDetail totalAmount={totalCartAmount}>
 							<OrderForm
 								email={state.email}

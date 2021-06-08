@@ -2,7 +2,7 @@
 	--grid-col-count: 5;
 	display: grid;
 	grid-template-columns: repeat(var(--grid-col-count), 1fr);
-	align-items: center;
+	align-items: stretch;
 	justify-items: center;
 	grid-column-gap: 32px;
 	grid-row-gap: 32px;

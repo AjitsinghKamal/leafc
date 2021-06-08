@@ -43,6 +43,11 @@
 	&_title {
 		font-weight: 600;
 	}
+	&_description {
+		font-size: 0.875rem;
+		font-weight: 300;
+		text-transform: capitalize;
+	}
 	&_meta {
 		display: flex;
 		justify-content: space-between;
