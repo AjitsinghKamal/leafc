@@ -1,4 +1,9 @@
-#### Leaf Commerce
+### Leaf Commerce
+
+![Screenshot 2021-06-08 at 09 56 28](https://user-images.githubusercontent.com/18217523/121124996-710d6780-c843-11eb-9553-e55794a60a0c.png)
+![Screenshot 2021-06-08 at 10 23 08](https://user-images.githubusercontent.com/18217523/121125107-a0bc6f80-c843-11eb-8b27-4d4791a5a7a9.png)
+![Screenshot 2021-06-08 at 10 23 30](https://user-images.githubusercontent.com/18217523/121125121-a3b76000-c843-11eb-805e-e33e759158c6.png)
+
 
 This is a monorepo for a simple ecommerce shopping application.
 
@@ -12,7 +17,7 @@ This is a monorepo for a simple ecommerce shopping application.
 -   To get the server running locally
 
 ```
-- Run prisma generate # creates prisma client mirroring latest db state
+- Run prisma generate OR npx prisma generate # creates prisma client mirroring latest db state
 
 - Run yarn server:dev
 
@@ -34,9 +39,12 @@ Run yarn client:dev
 
 -   The app should be running now `localhost:3000`
 
+
+
+
 ### Architecture
 
-##### Backend
+#### Backend
 
 The entire backend is written with `Node.JS`. The api layer is built with `graphql` and is managed by light-weight, fastify graphql server [Mercurius-JS](https://mercurius.dev/#/).
 
@@ -44,7 +52,7 @@ For database - SQLite is being used for the sake of simplicity as other relation
 
 `Prisma` is used for database modeling and querying.
 
-##### Frontend
+#### Frontend
 
 Frontend architecture is also pretty straight-forward with `Next.JS` working as the framework. It's pretty feature rich and SSR suits e-commerce app well.
 
