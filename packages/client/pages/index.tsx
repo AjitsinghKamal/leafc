@@ -2,12 +2,14 @@ import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
-import { ProductCard, Grid, DefaultLayout } from "components";
+import { ProductCard, Grid, DefaultLayout, NavBtn } from "components";
 import { useCartStore } from "stores";
 import css from "styles/Home.module.scss";
 
 import { clientSsr } from "graphql/client";
 import { GET_PRODUCTS } from "graphql/queries";
+
+import Arrow from "assets/arrow.svg";
 
 type Props = {
 	products: ProductType[];
@@ -25,11 +27,19 @@ export default function Home({ products }: Props) {
 			<DefaultLayout>
 				<main className="pageContainer">
 					<section className={css.meta}>
-						<h3>
-							{router.query.search
-								? `Plants matching "${router.query.search}"`
-								: "All Our Plants"}
-						</h3>
+						{router.query.search ? (
+							<div>
+								<NavBtn to="/" ghost>
+									<Arrow width={20} />
+								</NavBtn>
+								<h2>
+									Plants matching &#8220;{router.query.search}
+									&#8221;
+								</h2>
+							</div>
+						) : (
+							<h3>All Plants</h3>
+						)}
 					</section>
 					<section>
 						<Grid>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 import { Input } from "components";
@@ -30,6 +30,14 @@ function SearchBar() {
 	const handleInputChange = ({ value }: { value: string }) => {
 		setSearchText(value);
 	};
+
+	useEffect(() => {
+		if (Array.isArray(router.query.search)) {
+			setSearchText(router.query.search[0]);
+		} else {
+			setSearchText(router.query.search || "");
+		}
+	}, [router.query.search]);
 
 	return (
 		<form onSubmit={handleSubmit} className={css.searchbar}>
