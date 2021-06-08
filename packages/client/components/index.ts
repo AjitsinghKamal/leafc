@@ -8,4 +8,7 @@ export { default as CartItem } from "./cart/CartItem";
 export { default as SearchBar } from "./searchbar/SearchBar";
 export { default as CartDetail } from "./cart-details/CartDetails";
 export { default as OrderForm } from "./order-form/OrderForm";
+export type { Props as OrderFormProps } from "./order-form/OrderForm";
 export { default as Placeholder } from "./placeholder/Placeholder";
+export { default as CartNav } from "./cart-nav/CartNav";
+export { default as NavBtn } from "./nav-btn/NavBtn";

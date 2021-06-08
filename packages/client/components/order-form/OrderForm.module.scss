@@ -20,5 +20,13 @@
 		font-weight: 600;
 		font-size: 1.2rem;
 		margin-top: auto;
+		&_btn_icon {
+			width: 24px;
+			vertical-align: middle;
+		}
+		&:disabled {
+			opacity: 0.5;
+			pointer-events: none;
+		}
 	}
 }

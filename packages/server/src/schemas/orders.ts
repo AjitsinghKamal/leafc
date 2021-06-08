@@ -44,8 +44,7 @@ export const resolvers: IResolvers = {
 			const isValid = emailRegexp.test(email);
 			if (!isValid) {
 				throw new ErrorWithProps("Invalid Email Id", {
-					email,
-					timestamp: Math.round(new Date().getTime() / 1000),
+					field: "email",
 				});
 			}
 			return prisma.order.create({

@@ -1,14 +1,14 @@
 import cx from "classnames";
-import SadIcon from "assets/sad.svg";
 import css from "./Placeholder.module.scss";
 
 type Props = {
 	msg: string;
+	icon: React.ReactNode;
 };
-function Placeholder({ msg }: Props) {
+function Placeholder({ msg, icon }: Props) {
 	return (
 		<div className={cx("card", css.placeholder)}>
-			<SadIcon className={css.placeholder_icon} />
+			{icon}
 			<p className={css.placeholder_msg}>{msg}</p>
 		</div>
 	);

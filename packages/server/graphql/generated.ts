@@ -228,13 +228,13 @@ export type ResolversTypes = {
 	String: ResolverTypeWrapper<Scalars["String"]>;
 	Mutation: ResolverTypeWrapper<{}>;
 	Float: ResolverTypeWrapper<Scalars["Float"]>;
-	DateTime: ResolverTypeWrapper<Scalars["DateTime"]>;
 	Product: ResolverTypeWrapper<Product>;
 	ID: ResolverTypeWrapper<Scalars["ID"]>;
 	Order: ResolverTypeWrapper<Order>;
 	OrderItemInput: OrderItemInput;
 	OrderItem: ResolverTypeWrapper<OrderItem>;
 	Category: ResolverTypeWrapper<Category>;
+	DateTime: ResolverTypeWrapper<Scalars["DateTime"]>;
 	Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
 };
 
@@ -245,13 +245,13 @@ export type ResolversParentTypes = {
 	String: Scalars["String"];
 	Mutation: {};
 	Float: Scalars["Float"];
-	DateTime: Scalars["DateTime"];
 	Product: Product;
 	ID: Scalars["ID"];
 	Order: Order;
 	OrderItemInput: OrderItemInput;
 	OrderItem: OrderItem;
 	Category: Category;
+	DateTime: Scalars["DateTime"];
 	Boolean: Scalars["Boolean"];
 };
 
@@ -304,11 +304,6 @@ export type MutationResolvers<
 		>
 	>;
 };
-
-export interface DateTimeScalarConfig
-	extends GraphQLScalarTypeConfig<ResolversTypes["DateTime"], any> {
-	name: "DateTime";
-}
 
 export type ProductResolvers<
 	ContextType = MercuriusContext,
@@ -364,14 +359,19 @@ export type CategoryResolvers<
 	isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export interface DateTimeScalarConfig
+	extends GraphQLScalarTypeConfig<ResolversTypes["DateTime"], any> {
+	name: "DateTime";
+}
+
 export type Resolvers<ContextType = MercuriusContext> = {
 	Query?: QueryResolvers<ContextType>;
 	Mutation?: MutationResolvers<ContextType>;
-	DateTime?: GraphQLScalarType;
 	Product?: ProductResolvers<ContextType>;
 	Order?: OrderResolvers<ContextType>;
 	OrderItem?: OrderItemResolvers<ContextType>;
 	Category?: CategoryResolvers<ContextType>;
+	DateTime?: GraphQLScalarType;
 };
 
 /**

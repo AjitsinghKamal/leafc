@@ -16,11 +16,10 @@ function SearchBar() {
 
 	const shouldFetchResult = () => {
 		if (searchText) {
-			router.query.search = searchText;
+			router.push(`/?search=${searchText}`);
 		} else {
-			router.query = {};
+			router.push("/");
 		}
-		router.push(router);
 	};
 
 	const handleSubmit = (e: React.FormEvent) => {

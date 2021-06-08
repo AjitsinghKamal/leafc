@@ -6,14 +6,23 @@ import css from "./CartItem.module.scss";
 import AddIcon from "assets/add.svg";
 import MinIcon from "assets/minus.svg";
 
+type Props = {
+	onQuantityUpdate: (
+		itemId: string,
+		oldValue: number,
+		factor: 1 | -1
+	) => void;
+};
 function CartItem({
+	id,
 	title,
 	price,
 	category,
 	image,
 	description,
 	quantity,
-}: CartItem) {
+	onQuantityUpdate,
+}: Props & CartItem) {
 	return (
 		<div className={cx("card", css.cartitem)}>
 			<div>
@@ -38,11 +47,21 @@ function CartItem({
 					<div className={css.quant_wrap}>
 						<span className={css.quant_label}>Quantity</span>
 						<div className={css.quant}>
-							<button className={css.btn___action}>
+							<button
+								className={css.btn___action}
+								onClick={() =>
+									onQuantityUpdate(id, quantity || 1, 1)
+								}
+							>
 								<AddIcon className={css.icon} />
 							</button>
 							<span>{quantity}</span>
-							<button className={css.btn___action}>
+							<button
+								className={css.btn___action}
+								onClick={() =>
+									onQuantityUpdate(id, quantity || 1, -1)
+								}
+							>
 								<MinIcon className={css.icon} />
 							</button>
 						</div>

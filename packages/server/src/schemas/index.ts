@@ -15,13 +15,18 @@ const Query = `
 
 export const mergedSchema = [
 	Query,
-	DateTimeTypeDefinition,
 	Product,
 	Order,
 	Category,
+	DateTimeTypeDefinition,
 ];
 export const resolvers = {
-	...ProductResolver,
+	Query: {
+		...ProductResolver.Query,
+		...OrderResolver.Query,
+	},
+	Mutation: {
+		...OrderResolver.Mutation,
+	},
 	DateTime: DateTimeResolver,
-	...OrderResolver,
 };

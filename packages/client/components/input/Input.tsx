@@ -1,4 +1,5 @@
 import css from "./Input.module.scss";
+import cx from "classnames";
 
 type onChangeArg = {
 	value: string;
@@ -29,13 +30,13 @@ function Input({ value, onChange, name, error, label, placeholder }: Props) {
 				</label>
 			)}
 			<input
-				className={css.input}
+				className={cx(css.input, { [css.input___hasErr]: error })}
 				onChange={shouldHandleChange}
 				name={name}
 				value={value}
 				placeholder={placeholder}
 			/>
-			{error && <small>{error}</small>}
+			{error && <small className={css.input_err}>{error}</small>}
 		</div>
 	);
 }

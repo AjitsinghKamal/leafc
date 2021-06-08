@@ -5,6 +5,9 @@
 	border-radius: 10px;
 	transition: box-shadow 0.3s;
 	box-shadow: 0 0 0 1px var(--dark100);
+	&___hasErr {
+		box-shadow: 0 0 0 1px var(--red200);
+	}
 	&_wrap {
 		margin: 16px 0;
 	}
@@ -15,6 +18,10 @@
 		display: block;
 		font-weight: 500;
 		opacity: 0.8;
+	}
+	&_err {
+		color: var(--red200);
+		font-weight: 600;
 	}
 	&:focus,
 	&:focus-visible,

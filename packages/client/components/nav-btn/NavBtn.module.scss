@@ -1,0 +1,12 @@
+.navbtn {
+	margin-left: auto;
+	position: relative;
+	background: var(--blue200);
+	padding: 12px 16px;
+	border-radius: 10px;
+	font-weight: 600;
+	transition: box-shadow 0.3s;
+	&:hover {
+		box-shadow: 0 0 0 2px var(--blue200);
+	}
+}

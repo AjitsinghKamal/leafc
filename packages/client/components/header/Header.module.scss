@@ -11,15 +11,4 @@
 	max-width: var(--container-wd);
 	background: var(--bg);
 	padding: 0 var(--container-pd);
-	&_cartbtn {
-		margin-left: auto;
-		background: var(--blue200);
-		padding: 12px 16px;
-		border-radius: 10px;
-		font-weight: 600;
-		transition: box-shadow 0.3s;
-		&:hover {
-			box-shadow: 0 0 0 2px var(--blue200);
-		}
-	}
 }

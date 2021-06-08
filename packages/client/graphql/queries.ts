@@ -13,3 +13,17 @@ export const GET_PRODUCTS = gql`
 		}
 	}
 `;
+
+export const CHECKOUT = gql`
+	mutation Checkout(
+		$email: String!
+		$address: String!
+		$pr: Float!
+		$items: [OrderItemInput!]!
+	) {
+		postOrder(email: $email, address: $address, price: $pr, items: $items) {
+			id
+			email
+		}
+	}
+`;
