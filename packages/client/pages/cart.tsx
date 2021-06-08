@@ -17,11 +17,14 @@ import SadIcon from "assets/sad.svg";
 import WoWIcon from "assets/wow.svg";
 
 export default function Cart() {
-	const [items, ids, changeProductQuantity] = useCartStore((state) => [
-		state.products,
-		state.productsIdOrder,
-		state.changeProductQuantity,
-	]);
+	const [items, ids, changeProductQuantity, resetCart] = useCartStore(
+		(state) => [
+			state.products,
+			state.productsIdOrder,
+			state.changeProductQuantity,
+			state.reset,
+		]
+	);
 
 	const [state, setField] = useState({ email: "", address: "" });
 	const [errorBag, setError] = useState({ email: "", address: "" });
@@ -99,10 +102,12 @@ export default function Cart() {
 					quantity: items[id].quantity,
 				})),
 			});
+			resetCart();
 			setSuccess(true);
 		} catch (e) {
 			const { message, extensions } = e.response.errors[0];
-			setError({ ...state, [extensions.field]: message });
+			extensions.field &&
+				setError({ ...state, [extensions.field]: message });
 		} finally {
 			setLoading(false);
 		}

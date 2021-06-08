@@ -7,9 +7,11 @@ export type Props = {
 function Header({ overrideNav }: Props) {
 	return (
 		<header className={css.header}>
-			<SearchBar />
-			{overrideNav || <CartNav />}
-			{}
+			<div className={css.header_container}>
+				<SearchBar />
+				{overrideNav || <CartNav />}
+				{}
+			</div>
 		</header>
 	);
 }

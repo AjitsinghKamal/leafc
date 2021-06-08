@@ -53,9 +53,12 @@ function OrderForm({
 					label="Delivery Address"
 					error={addressError}
 				/>
-				<button className={css.details_btn} disabled={disable}>
+				<button
+					className={css.details_btn}
+					disabled={disable || loading}
+				>
 					{loading ? (
-						<Spin className={css.detail_btn_icon} />
+						<Spin className={css.details_btn_icon} />
 					) : (
 						"Place Order"
 					)}

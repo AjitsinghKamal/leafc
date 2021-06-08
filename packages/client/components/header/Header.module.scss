@@ -4,11 +4,14 @@
 	left: 0;
 	right: 0;
 	z-index: 100;
-	display: flex;
-	margin: 0 auto;
-	align-items: center;
-	height: var(--header-ht);
-	max-width: var(--container-wd);
 	background: var(--bg);
-	padding: 0 var(--container-pd);
+	box-shadow: 0 0 2px 0px var(--blue200);
+	&_container {
+		display: flex;
+		height: var(--header-ht);
+		max-width: var(--container-wd);
+		margin: 0 auto;
+		align-items: center;
+		padding: 0 var(--container-pd);
+	}
 }

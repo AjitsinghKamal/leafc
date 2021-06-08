@@ -23,6 +23,7 @@ type CartState = {
 	changeProductQuantity: (T: string, C: number) => void;
 	addProducts: (T: CartItem) => void;
 	removeProducts: (T: string) => void;
+	reset: () => void;
 };
 
 const useCartStore = create<CartState>((set) => ({
@@ -45,13 +46,21 @@ const useCartStore = create<CartState>((set) => ({
 	},
 	addProducts: (newItem) =>
 		set((state) => {
+			const existInCart = state.products[newItem.id];
+			const order = existInCart
+				? [...state.productsIdOrder]
+				: [...state.productsIdOrder, newItem.id];
+			const quantity =
+				existInCart && existInCart.quantity
+					? existInCart.quantity + 1
+					: 1;
 			return {
-				productsIdOrder: [...state.productsIdOrder, newItem.id],
+				productsIdOrder: order,
 				products: {
 					...state.products,
 					[newItem.id]: {
 						...newItem,
-						quantity: newItem.quantity || 1,
+						quantity,
 					},
 				},
 			};
@@ -65,6 +74,13 @@ const useCartStore = create<CartState>((set) => ({
 					(id) => id !== item
 				),
 				products: _items,
+			};
+		}),
+	reset: () =>
+		set(() => {
+			return {
+				productsIdOrder: [],
+				products: {},
 			};
 		}),
 }));
