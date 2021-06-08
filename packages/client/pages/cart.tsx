@@ -104,6 +104,7 @@ export default function Cart() {
 			});
 			resetCart();
 			setSuccess(true);
+			setField({ email: "", address: "" });
 		} catch (e) {
 			const { message, extensions } = e.response.errors[0];
 			extensions.field &&
