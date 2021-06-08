@@ -1,6 +1,8 @@
 .cartitem {
 	max-width: 600px;
 	display: flex;
+	margin-bottom: 12px;
+	position: relative;
 	&_image {
 		border-radius: var(--border-rd);
 	}
@@ -49,6 +51,15 @@
 			&:hover {
 				opacity: 1;
 			}
+		}
+	}
+	&_close {
+		position: absolute;
+		left: -10px;
+		top: -10px;
+		color: var(--red200);
+		&_icon {
+			width: 24px;
 		}
 	}
 }

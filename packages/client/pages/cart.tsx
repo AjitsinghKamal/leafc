@@ -17,14 +17,14 @@ import SadIcon from "assets/sad.svg";
 import WoWIcon from "assets/wow.svg";
 
 export default function Cart() {
-	const [items, ids, changeProductQuantity, resetCart] = useCartStore(
-		(state) => [
+	const [items, ids, changeProductQuantity, resetCart, removeProducts] =
+		useCartStore((state) => [
 			state.products,
 			state.productsIdOrder,
 			state.changeProductQuantity,
 			state.reset,
-		]
-	);
+			state.removeProducts,
+		]);
 
 	const [state, setField] = useState({ email: "", address: "" });
 	const [errorBag, setError] = useState({ email: "", address: "" });
@@ -140,6 +140,7 @@ export default function Cart() {
 									<CartItem
 										{...items[itemId]}
 										key={itemId}
+										onRemove={removeProducts}
 										onQuantityUpdate={
 											handleUpdateInQuantity
 										}

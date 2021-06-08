@@ -5,6 +5,7 @@ import ImageLoader from "utils/ImageLoader";
 import css from "./CartItem.module.scss";
 import AddIcon from "assets/add.svg";
 import MinIcon from "assets/minus.svg";
+import CloseIcon from "assets/close.svg";
 
 type Props = {
 	onQuantityUpdate: (
@@ -12,6 +13,7 @@ type Props = {
 		oldValue: number,
 		factor: 1 | -1
 	) => void;
+	onRemove: (itemId: string) => void;
 };
 function CartItem({
 	id,
@@ -22,9 +24,18 @@ function CartItem({
 	description,
 	quantity,
 	onQuantityUpdate,
+	onRemove,
 }: Props & CartItem) {
 	return (
 		<div className={cx("card", css.cartitem)}>
+			<button
+				className={css.cartitem_close}
+				onClick={() => {
+					onRemove(id);
+				}}
+			>
+				<CloseIcon className={css.cartitem_close_icon} />
+			</button>
 			<div>
 				<Image
 					className={css.cartitem_image}
